@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xml="http://www.w3.org/XML/1998/namespace"
+    elementFormDefault="qualified"
+
+    targetNamespace="https://github.com/MUCI/emrex-elmo-extensions"
+    xmlns="https://github.com/MUCI/emrex-elmo-extensions"
+>
+    <xs:import
+        schemaLocation="http://www.w3.org/2001/03/xml.xsd"
+        namespace="http://www.w3.org/XML/1998/namespace"
+    />
+
+    <xs:annotation>
+        <xs:documentation>
+            This schema describes the USOS extensions to the EMREX ELMO format. More information
+            can be found here:
+
+            https://github.com/MUCI/emrex-elmo-extensions
+        </xs:documentation>
+    </xs:annotation>
+
+</xs:schema>
