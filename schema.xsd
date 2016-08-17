@@ -21,4 +21,66 @@
         </xs:documentation>
     </xs:annotation>
 
+    <xs:element name="globalMeta">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="usoswebVersion" type="xs:string"></xs:element>
+                <xs:element name="extraNcpRequestParams">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="allow_to_pick_courses" type="xs:boolean"></xs:element>
+                            <xs:element name="allow_not_passed_courses" type="xs:boolean"></xs:element>
+                            <xs:element name="include_grades">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:enumeration value="all"></xs:enumeration>
+                                        <xs:enumeration value="latest"></xs:enumeration>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="losMeta">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="examReport" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="name" type="xs:string"></xs:element>
+                            <xs:element name="session" minOccurs="0" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="number" type="xs:positiveInteger"></xs:element>
+                                        <xs:element name="name" type="xs:string" minOccurs="0"></xs:element>
+                                        <xs:element name="resultLabel" type="xs:string"></xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="possibleResultLabels" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="possibleLabel" minOccurs="0" maxOccurs="unbounded">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="resultLabel" type="xs:string"></xs:element>
+                                                    <xs:element name="isPassing" type="xs:boolean"></xs:element>
+                                                    <xs:element name="value" type="xs:decimal"></xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
 </xs:schema>
