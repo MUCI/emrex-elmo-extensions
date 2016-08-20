@@ -22,22 +22,33 @@
     </xs:annotation>
 
     <xs:element name="globalMeta">
+        <xs:annotation>
+            <xs:documentation>
+                This optional element is supposed to be included in the `/elmo/extension`
+                element.
+            </xs:documentation>
+        </xs:annotation>
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="usoswebVersion" type="xs:string"></xs:element>
-                <xs:element name="extraNcpRequestParams">
+                <xs:element name="usoswebVersion" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>
+                            Version number of the application which has generated the NCP response.
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="extraNcpRequestParams" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>
+                            Values of the additional NCP parameters, as described in the README.md file.
+                            These values MAY be included even when no actual values were passed to the NCP
+                            (in this case, they will contain the fixed versions of their default values).
+                        </xs:documentation>
+                    </xs:annotation>
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="allow_to_pick_courses" type="xs:boolean"></xs:element>
-                            <xs:element name="allow_not_passed_courses" type="xs:boolean"></xs:element>
-                            <xs:element name="include_grades">
-                                <xs:simpleType>
-                                    <xs:restriction base="xs:string">
-                                        <xs:enumeration value="all"></xs:enumeration>
-                                        <xs:enumeration value="latest"></xs:enumeration>
-                                    </xs:restriction>
-                                </xs:simpleType>
-                            </xs:element>
+                            <xs:element name="allowToPickCourses" type="xs:boolean"/>
+                            <xs:element name="allowNotPassedCourses" type="xs:boolean"/>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
@@ -45,31 +56,95 @@
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="losMeta">
+    <xs:element name="loiMeta">
+        <xs:annotation>
+            <xs:documentation>
+                This optional element is supposed to be included in the
+                `//learningOpportunityInstance/extension` elements.
+            </xs:documentation>
+        </xs:annotation>
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="examReport" minOccurs="0" maxOccurs="unbounded">
+                    <xs:annotation>
+                        <xs:documentation>
+                            In USOS model, multiple exam reports can be bound with a single LOI. This may
+                            result in multiple grades for a single course.
+
+                            This means that - currently - &lt;learningOpportunityInstance/resultLabel&gt;
+                            element MAY contain multiple grade labels (separated with spaces). We have no
+                            way of determining which one of these grades is the one that the reader is
+                            looking for, so we will have to include them all (same goes for the generated
+                            PDFs).
+
+                            This element describes this model, along with some additional data.
+                        </xs:documentation>
+                    </xs:annotation>
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="name" type="xs:string"></xs:element>
+                            <xs:element name="name" type="xs:string">
+                                <xs:annotation>
+                                    <xs:documentation>
+                                        The name of this exam report (most probably in Polish).
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
                             <xs:element name="session" minOccurs="0" maxOccurs="unbounded">
+                                <xs:annotation>
+                                    <xs:documentation>
+                                        Grades can change in time, as each exam consists of a couple of exam sessions.
+                                        This element describes a single session. The final grade for the exam report is
+                                        taken from the *last* of the sessions.
+                                    </xs:documentation>
+                                </xs:annotation>
                                 <xs:complexType>
                                     <xs:sequence>
-                                        <xs:element name="number" type="xs:positiveInteger"></xs:element>
-                                        <xs:element name="name" type="xs:string" minOccurs="0"></xs:element>
-                                        <xs:element name="resultLabel" type="xs:string"></xs:element>
+                                        <xs:element name="number" type="xs:positiveInteger">
+                                            <xs:annotation>
+                                                <xs:documentation>
+                                                    Number of the exam session (usually 1, 2 or 3).
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="name" type="xs:string" minOccurs="0">
+                                            <xs:annotation>
+                                                <xs:documentation>
+                                                    The name of this exam session (most probably in Polish).
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="resultLabel" type="xs:string">
+                                            <xs:annotation>
+                                                <xs:documentation>
+                                                    The grade acquired during this particular session.
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
                                     </xs:sequence>
                                 </xs:complexType>
                             </xs:element>
                             <xs:element name="possibleResultLabels" minOccurs="0">
+                                <xs:annotation>
+                                    <xs:documentation>
+                                        Full list of all possible resultLabel values, for this particular LOI. In USOS,
+                                        resultLabels are always enumarations (as opposed to, say, floats). Including
+                                        this information might make it easier for other USOS system to import the
+                                        grade (by comparing this enumeration with other enumerations defined locally).
+                                    </xs:documentation>
+                                </xs:annotation>
                                 <xs:complexType>
                                     <xs:sequence>
                                         <xs:element name="possibleLabel" minOccurs="0" maxOccurs="unbounded">
                                             <xs:complexType>
                                                 <xs:sequence>
-                                                    <xs:element name="resultLabel" type="xs:string"></xs:element>
-                                                    <xs:element name="isPassing" type="xs:boolean"></xs:element>
-                                                    <xs:element name="value" type="xs:decimal"></xs:element>
+                                                    <xs:element name="resultLabel" type="xs:string"/>
+                                                    <xs:element name="isPassing" type="xs:boolean">
+                                                        <xs:annotation>
+                                                            <xs:documentation>
+                                                                True, if this particular grade allows to pass the course.
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:element>
                                                 </xs:sequence>
                                             </xs:complexType>
                                         </xs:element>
