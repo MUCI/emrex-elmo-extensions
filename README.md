@@ -28,8 +28,10 @@ of the other parameters.)
 
 Boolean (`true` or `false`). **Default is false.**
 
-When this is set to `true`, then all courses will displayed to the student,
-including the *failed* courses, and the courses which he has not finished yet.
+By default, only the passed courses are displayed to the student (and only
+those can be exported). When this is set to `true`, then *all* courses will be
+displayed to the student, including the *failed* courses, and the courses which
+he has not finished yet.
 
 
 ELMO file extensions

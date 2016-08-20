@@ -4,8 +4,8 @@
     xmlns:xml="http://www.w3.org/XML/1998/namespace"
     elementFormDefault="qualified"
 
-    targetNamespace="https://github.com/MUCI/emrex-elmo-extensions"
-    xmlns="https://github.com/MUCI/emrex-elmo-extensions"
+    targetNamespace="https://github.com/MUCI/emrex-elmo-extensions/tree/stable-v1"
+    xmlns="https://github.com/MUCI/emrex-elmo-extensions/tree/stable-v1"
 >
     <xs:import
         schemaLocation="http://www.w3.org/2001/03/xml.xsd"
