@@ -127,7 +127,7 @@
                                 <xs:annotation>
                                     <xs:documentation>
                                         Full list of all possible resultLabel values, for this particular LOI. In USOS,
-                                        resultLabels are always enumarations (as opposed to, say, floats). Including
+                                        resultLabels are always enumerations (as opposed to, say, floats). Including
                                         this information might make it easier for other USOS system to import the
                                         grade (by comparing this enumeration with other enumerations defined locally).
                                     </xs:documentation>
