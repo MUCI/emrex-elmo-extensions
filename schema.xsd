@@ -75,7 +75,8 @@
                             element MAY contain multiple grade labels (separated with spaces). We have no
                             way of determining which one of these grades is the one that the reader is
                             looking for, so we will have to include them all (same goes for the generated
-                            PDFs).
+                            PDFs). If `loiMeta` element exists, but no `examReport` elements do, then it
+                            means that no exam reports were assigned for this course yet.
 
                             This element describes this model, along with some additional data.
                         </xs:documentation>
